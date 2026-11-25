@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Country</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="container py-4">
+  <h1>Add Country</h1>
+  <% if (errors.length > 0) { %>
+  <div class="alert alert-danger">
+    <% errors.forEach(e => { %>
+      <div><%= e %></div>
+    <% }); %>
+  </div>
+<% } %>
+
+  <form action="/addCountry" method="POST">
+    <div class="mb-3">
+      <label for="country_name" class="form-label">Country Name</label>
+      <input type="text" value="<%= country.country_name || '' %>" id="country_name" name="country_name" class="form-control" maxlength="30" required>
+    </div>
+    <div class="mb-3">
+      <label for="popular_site" class="form-label">Popular Site</label>
+      <input type="text" value="<%= country.popular_site || '' %>" id="popular_site" name="popular_site" class="form-control" maxlength="50" required>
+    </div>
+    <div class="mb-3">
+      <label for="capital" class="form-label">Capital</label>
+      <input type="text" value="<%= country.capital || '' %>" id="capital" name="capital" class="form-control" maxlength="30" required>
+    </div>
+    <div class="mb-3">
+      <label for="population" class="form-label">Population</label>
+      <input type="number" value="<%= country.population || '' %>" id="population" name="population" class="form-control" min="0" step="1" required>
+    </div>
+    <div class="mb-3">
+      <label for="visited" class="form-label">Visited</label>
+      <select id="visited" name="visited" class="form-select">
+        <option value="">--</option>
+        <option value="Y" <%= country.visited === "Y" ? "selected" : "" %>>Y</option>
+        <option value="N" <%= country.visited === "N" ? "selected" : "" %>>N</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/countries" class="btn btn-secondary">Cancel</a>
+  </form>
+</body>
+</html>
